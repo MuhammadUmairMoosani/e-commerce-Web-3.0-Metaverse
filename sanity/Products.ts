@@ -15,7 +15,10 @@ export default {
             options: {
                 source:'productName',
                 maxLength: 200,
-                slugify: (input: any) => input.toLowerCare().replace(/\s+/g, '-').slice(0, 200)
+                slugify: (input: string) => input
+                         .toLowerCase()
+                         .replace(/\s+/g, '-')
+                         .slice(0, 200)
             }   
         },
         {
@@ -55,6 +58,17 @@ export default {
             name:"price",
             type:"number",
             title:"Price"
+        },
+        {
+            name:'size',
+            type: 'array',
+            title:'Sizes',
+            of: [{type:'string'}]
+        },
+        {
+            name:'quantity',
+            type:'number',
+            title:'Quantity',
         }
     ]
 }

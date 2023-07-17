@@ -15,7 +15,7 @@ const Expand: FC<{ item: NavbarItemType }> = ({ item }) => {
         setIsTimeout(false)
     }
     return (
-        <li className={`${isExpended ? "h-48" : "h-12"} duration-300 list-none`}>
+        <li className={`duration-300 list-none`}>
             <div onClick={handleExpend} className="py-2  px-3 flex rounded-md duration-300 hover:bg-gray-200 items-center justify-between">
                 <Link href={item.href}>{item.label}</Link>
                 {
