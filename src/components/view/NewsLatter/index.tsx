@@ -1,7 +1,7 @@
 
 const NewsLatter = () => {
   return (
-    <div className="text-center space-y-4 h-[80vh] flex flex-col justify-center items-center text-gray-800">
+    <div className="text-center space-y-4 min-h-[40vh] md:h-[80vh] lg:min-h-[50rem] flex flex-col justify-center items-center text-gray-800">
       <h6 className="text-5xl md:text-7xl lg:text-[7.5rem] leading-[5.9rem] font-bold absolute -z-20 text-gray-100">Newslette r</h6>
       <h6 className="text-3xl md:text-4xl font-bold">Subscribe Our Newsletter</h6>
       <p className="max-w-[16rem] text-lg font-medium">Get the latest information and promo offers directly</p>

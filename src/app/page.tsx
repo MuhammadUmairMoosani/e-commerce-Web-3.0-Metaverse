@@ -1,5 +1,4 @@
-import BASE_PATH_FOR_API from "@/components/shared/BasePath";
-import Footer from "@/components/view/Footer";
+import { responseType } from "@/components/utils/ProductsDataArrayAndType";
 import Hero from "@/components/view/Hero";
 import Jewellery from "@/components/view/Jewellery";
 import NewsLatter from "@/components/view/NewsLatter";
@@ -7,7 +6,7 @@ import ProductCarousel from "@/components/view/ProductCarouse";
 import ProductTypes from "@/components/view/ProductTypes";
 
 async function fetchAllProductData() {
-  let res = await fetch(`${BASE_PATH_FOR_API}/api/products`);
+  let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`);
   if(!res.ok) {
     throw new Error('Failed to fetch')
   }
@@ -16,12 +15,12 @@ async function fetchAllProductData() {
 
 
 export default async function Home() {
-  let { response } = await fetchAllProductData()
+  let { result }: responseType = await fetchAllProductData()
   return (
     <div>
-      <Hero />
+      <Hero />s
       <ProductTypes />
-      <ProductCarousel ProductData={response} />
+      <ProductCarousel ProductData={result} />
       <Jewellery />
       <NewsLatter />
     </div>
