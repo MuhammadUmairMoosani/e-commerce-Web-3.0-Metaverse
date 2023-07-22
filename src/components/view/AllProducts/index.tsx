@@ -38,22 +38,22 @@ export default class AllProductsComponent extends Component<{ ProductData: props
     }
     render(): ReactNode {
         return (
-                <InfiniteScroll
-                dataLength={this.state.items ? this.state.items.length: 0} //This is important field to render the next data
-                    next={this.getData}
-                    hasMore={this.state.hasMore}
-                    loader={<h4>Loading...</h4>}
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                            <b>Yay! You have seen it all</b>
-                        </p>
-                    }
-                    className='grid grid-cols-1 md:grid-cols-2 py-10 lg:grid-cols-3 gap-4'
-                >
+            <InfiniteScroll
+                dataLength={this.state.items ? this.state.items.length : 0} //This is important field to render the next data
+                next={this.getData}
+                hasMore={this.state.hasMore}
+                loader={<h4>Loading...</h4>}
+                endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                    </p>
+                }
+                className='grid grid-cols-1 md:grid-cols-2 py-10 lg:grid-cols-3 gap-4'
+            >
                 {this.state.items && this.state.items.map((item: oneProductType, index: number) => (
-                        <Card key={index} singleProductData={item} />
-                    ))}
-                </InfiniteScroll>
+                    <Card key={index} singleProductData={item} />
+                ))}
+            </InfiniteScroll>
         )
     }
 }
