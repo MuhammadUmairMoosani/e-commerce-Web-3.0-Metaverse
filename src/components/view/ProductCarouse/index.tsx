@@ -60,7 +60,7 @@ const ProductCarousel: FC<{ ProductData: Array<oneProductType> }> = ({ ProductDa
         onTouchStart={mouseDownForMobile}
         onTouchEnd={mouseUp}
       >
-        {ProductData.slice(0, 15).map((item: oneProductType, index: number) => (
+        {ProductData && ProductData.slice(0, 15).map((item: oneProductType, index: number) => (
           <Card key={index + 4} singleProductData={item} />
         ))}
       </div>
