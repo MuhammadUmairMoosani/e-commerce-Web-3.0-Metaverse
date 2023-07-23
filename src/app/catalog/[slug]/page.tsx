@@ -12,6 +12,7 @@
 
 import { responseType } from '@/components/utils/ProductsDataArrayAndType';
 import ProductDetail from '@/components/view/ProductDetail';
+import ContextWrapper from '@/global/context';
 import React, { FC } from 'react'
 
 async function fetchAllProductData(slug: string) {
@@ -21,11 +22,13 @@ async function fetchAllProductData(slug: string) {
   }
   return res.json();
 }
- 
-const Catalog = async ({ params }: {params: { slug: string}}) => {
+
+const Catalog = async ({ params }: { params: { slug: string } }) => {
   let data: responseType = await fetchAllProductData(params.slug)
   return (
-    <ProductDetail item={data.result[0]} />
+    <ContextWrapper>
+      <ProductDetail item={data.result[0]} />
+    </ContextWrapper>
   )
 }
 

@@ -1,12 +1,12 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useContext, useState, FC } from 'react';
 import { imagesType, oneProductType } from '@/components/utils/ProductsDataArrayAndType'
 import imageUrlBuilder from '@sanity/image-url'
-import { FC } from 'react'
 import { client } from '../../../../sanity/lib/client';
 import Image from 'next/image';
 import { BsCart2 } from 'react-icons/bs';
+import ContextWrapper, { cartContext } from '@/global/context';
 
 const builder: any = imageUrlBuilder(client);
 
@@ -15,6 +15,8 @@ function urlFor(srouce: any) {
 }
 
 const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
+  const {dispatch} = useContext(cartContext)
+
   const [imageForReviewOfSelected, setImageForReviewOfSelected] = useState<string>(item.image[0]._key)
   const [quantity, setQuantity] = useState(1);
 
@@ -28,7 +30,16 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
     }
   }
 
+  function handleAddToCart() {
+    let dataToAddInCart = {
+       productId: item._id,
+       quantity: quantity
+    };
+    dispatch({ payload: "addToCart", data: dataToAddInCart })
+  }
+
   return (
+    <ContextWrapper> 
     <div className='flex gap-x-4 md:gap-x-8'>
       {/* left */}
       <div>
@@ -61,7 +72,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
           <p className="text-lg font-semibold text-gray-700">Select Size</p>
           <div className='flex gap-2 py-2 text-gray-500'>
             {
-              item.size.map((subItem: string, index: string) => (
+              item.size.map((subItem: string, index: number) => (
                 <div key={index} className="hover:shadow-lg font-semibold cursor-pointer rounded-full bg-gray-100 w-12 h-12 flex justify-center items-center">{subItem}</div>
               ))
             }
@@ -80,7 +91,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
             </div>
         </div>
         <div className='flex gap-x-8 items-center'>
-          <button className="text-white bg-gray-900 border border-gray-500 px-4 py-2 flex items-center">
+          <button onClick={() => handleAddToCart()} className="text-white bg-gray-900 border border-gray-500 px-4 py-2 flex items-center">
             <BsCart2 />
             &nbsp;
             &nbsp;
@@ -90,6 +101,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
         </div>
       </div>
     </div>
+    </ContextWrapper>
   )
 }
 
